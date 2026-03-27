@@ -105,14 +105,14 @@ float StaticDrops(vec2 uv, float t) {
 }
 
 vec2 Drops(vec2 uv, float t, float l0, float l1, float l2) {
-    float s = StaticDrops(uv, t)*l0; 
+    // float s = StaticDrops(uv, t)*l0; // Removed small static drops to prevent black dots
     vec2 m1 = DropLayer2(uv, t)*l1;
     vec2 m2 = DropLayer2(uv*1.85, t)*l2;
     
-    float c = s+m1.x+m2.x;
+    float c = m1.x+m2.x;
     c = S(.3, 1., c);
     
-    return vec2(c, max(m1.y*l0, m2.y*l1));
+    return vec2(c, max(m1.y*l1, m2.y*l2));
 }
 
 void main() {
