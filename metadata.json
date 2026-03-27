@@ -1,5 +1,5 @@
 {
-  "name": "Heartfelt Rain Editor",
-  "description": "An atmospheric visual editor featuring the iconic 'Heartfelt' rain shader with high-fidelity refraction and fog effects.",
+  "name": "RainyNote",
+  "description": "A relaxing, immersive rain-themed memo application.",
   "requestFramePermissions": []
 }

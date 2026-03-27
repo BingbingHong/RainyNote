@@ -12,7 +12,9 @@ import {
   X, 
   Image as ImageIcon, 
   Video,
-  Wind
+  Wind,
+  Maximize,
+  Minimize
 } from 'lucide-react';
 
 interface Memo {
@@ -37,6 +39,27 @@ export default function App() {
   const [textureUrl, setTextureUrl] = useState<string | null>("https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?auto=format&fit=crop&w=1920&q=80");
   const [isVideo, setIsVideo] = useState(false);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+  }, []);
+
+  const toggleFullscreen = async () => {
+    try {
+      if (!document.fullscreenElement) {
+        await document.documentElement.requestFullscreen();
+      } else {
+        await document.exitFullscreen();
+      }
+    } catch (err) {
+      console.error("Error attempting to toggle fullscreen:", err);
+    }
+  };
   
   // Memo State
   const [memos, setMemos] = useState<Memo[]>([
@@ -105,6 +128,17 @@ export default function App() {
 
       {/* Overlay UI */}
       <div className="absolute inset-0 z-10 pointer-events-none flex flex-col justify-center items-center p-8">
+        {/* Top Right Fullscreen Control */}
+        <div className="absolute top-8 right-8 pointer-events-auto">
+          <button
+            onClick={toggleFullscreen}
+            className="w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-xl border border-white/10 rounded-full flex items-center justify-center shadow-2xl transition-all active:scale-95 text-white/70 hover:text-white"
+            title="Toggle Fullscreen"
+          >
+            {isFullscreen ? <Minimize className="w-5 h-5" /> : <Maximize className="w-5 h-5" />}
+          </button>
+        </div>
+
         {/* Memo Box in Center */}
         <div className="pointer-events-auto">
           <MemoBox 
