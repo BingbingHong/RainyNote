@@ -208,7 +208,7 @@ export default function App() {
                       type="range" min="0" max="1" step="0.01" 
                       value={rainAmount} 
                       onChange={(e) => setRainAmount(parseFloat(e.target.value))}
-                      className="w-full accent-blue-500 bg-white/10 h-1 rounded-lg appearance-none cursor-pointer"
+                      className="w-full accent-white bg-white/10 h-1 rounded-lg appearance-none cursor-pointer"
                     />
                   </div>
 
@@ -222,7 +222,7 @@ export default function App() {
                       type="range" min="0" max="2" step="0.01" 
                       value={fogAmount} 
                       onChange={(e) => setFogAmount(parseFloat(e.target.value))}
-                      className="w-full accent-blue-400 bg-white/10 h-1 rounded-lg appearance-none cursor-pointer"
+                      className="w-full accent-white bg-white/10 h-1 rounded-lg appearance-none cursor-pointer"
                     />
                   </div>
 
@@ -236,7 +236,7 @@ export default function App() {
                       type="range" min="0" max="2" step="0.01" 
                       value={refraction} 
                       onChange={(e) => setRefraction(parseFloat(e.target.value))}
-                      className="w-full accent-cyan-400 bg-white/10 h-1 rounded-lg appearance-none cursor-pointer"
+                      className="w-full accent-white bg-white/10 h-1 rounded-lg appearance-none cursor-pointer"
                     />
                   </div>
 
@@ -250,7 +250,7 @@ export default function App() {
                       type="range" min="0.1" max="3" step="0.1" 
                       value={speed} 
                       onChange={(e) => setSpeed(parseFloat(e.target.value))}
-                      className="w-full accent-indigo-400 bg-white/10 h-1 rounded-lg appearance-none cursor-pointer"
+                      className="w-full accent-white bg-white/10 h-1 rounded-lg appearance-none cursor-pointer"
                     />
                   </div>
                 </div>

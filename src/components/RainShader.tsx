@@ -73,6 +73,8 @@ vec2 DropLayer2(vec2 uv, float t) {
     
     float d = length((st-p)*a.yx);
     float mainDrop = S(.4, .0, d);
+    // Soften the drop center to make it look more like water and less like a solid black dot
+    mainDrop = mainDrop * 0.8; 
     
     float r = sqrt(S(1., y, st.y));
     float cd = abs(st.x-x);
@@ -146,7 +148,7 @@ void main() {
     vec3 col = textureLod(iChannel0, UV + distortion, focus).rgb;
     
     // Post processing
-    col *= vec3(.8, .85, 0.9); // Slight blue tint for atmosphere
+    col *= vec3(.9, .95, .9); // Slight bright/greenish tint for a fresher atmosphere
     col *= .8 - dot(UV - 0.5, UV - 0.5); // Vignette
     
     fragColor = vec4(col, 1.);
@@ -215,10 +217,10 @@ export const RainShader: React.FC<RainShaderProps> = ({
     gl.enableVertexAttribArray(posLoc);
     gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
 
-    // Initial texture
+    // Initial texture (black to prevent flash)
     const texture = gl.createTexture();
     gl.bindTexture(gl.TEXTURE_2D, texture);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([100, 100, 255, 255]));
+    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 0, 255]));
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
